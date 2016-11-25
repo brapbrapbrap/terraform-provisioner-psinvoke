@@ -1,12 +1,12 @@
 package main
 
 import (
+	"errors"
 	"github.com/hashicorp/terraform/terraform"
 	"github.com/mitchellh/mapstructure"
 	"log"
-	"time"
 	"runtime"
-	"errors"
+	"time"
 )
 
 type ResourceProvisioner struct {

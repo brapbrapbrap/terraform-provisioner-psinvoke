@@ -47,7 +47,7 @@ Once installed, you can provision resources by including a `psinvoke` provisione
       host = "server"
       username = "domain\user"
       password = "pass"
-      command = "d:\run.ps1"
+      script = "d:\run.ps1"
       params = "-t"
     }
   }
