@@ -3,16 +3,13 @@ package main
 import (
 	"github.com/hashicorp/terraform/plugin"
 	"github.com/hashicorp/terraform/terraform"
+	"github.com/brapbrapbrap/terraform-provisioner-psinvoke/psinvoke"
 )
 
-func ResourceProvisionerBuilder() terraform.ResourceProvisioner {
-	return &ResourceProvisioner{}
-}
-
 func main() {
-	serveOpts := &plugin.ServeOpts{
-		ProvisionerFunc: ResourceProvisionerBuilder,
-	}
-
-	plugin.Serve(serveOpts)
+	plugin.Serve(&plugin.ServeOpts{
+		ProvisionerFunc: func() terraform.ResourceProvisioner {
+			return new(psinvoke.ResourceProvisioner)
+		},
+	})
 }

@@ -1,12 +1,12 @@
-package main
+package psinvoke
 
 import (
+	"errors"
 	"github.com/hashicorp/terraform/terraform"
 	"github.com/mitchellh/mapstructure"
 	"log"
-	"time"
 	"runtime"
-	"errors"
+	"time"
 )
 
 type ResourceProvisioner struct {
@@ -113,4 +113,9 @@ func retryFunc(timeout time.Duration, f func() error) error {
 		case <-time.After(3 * time.Second):
 		}
 	}
+}
+
+func (r *ResourceProvisioner) Stop() error {
+	// Noop for now. TODO in the future.
+	return nil
 }

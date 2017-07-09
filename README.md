@@ -47,10 +47,31 @@ Once installed, you can provision resources by including a `psinvoke` provisione
       host = "server"
       username = "domain\user"
       password = "pass"
-      command = "d:\run.ps1"
+      script = "d:\run.ps1"
       params = "-t"
     }
   }
 }
 ```
 
+## Build Gotchas
+
+When building, make sure to build against a specific version of Terraform, roughly matching the version you are currently using. Building against the latest commit can produce issues with the API versions. To avoid this, pull down a specific tag in git, for example to build against v0.8.4:
+
+```
+> cd C:\go\src\github.com\hashicorp\terraform
+> git ls-remote --tags
+...
+# b09283b76c6371340659bebfea72e617cd13ad4e        refs/tags/v0.8.3
+# b845cb7093c24c49ece854bb38b55aff3783f195        refs/tags/v0.8.3^{}
+# 1737cfff270d479e31533e19609442c40344872d        refs/tags/v0.8.4
+# a791ff09b29d063dd4b6da0cac04ad3b83c836f5        refs/tags/v0.8.4^{}
+# 7ef08156c201953f758ab8bb9da2471d37c07f5f        refs/tags/v0.8.5
+# b4d477660b5abd20f2a70175460c9603797fada0        refs/tags/v0.8.5^{}
+# aa0a7fa2f6216fe12cdb2acd672fa5d9b5b92a12        refs/tags/v0.8.6
+# df4bcf64828598a25bd41f00470b2ab3a66f3169        refs/tags/v0.8.6^{}
+
+> git checkout a791ff09b29d063dd4b6da0cac04ad3b83c836f5
+> cd C:\go\src\github.com\brapbrapbrap\terraform-provisioner-psinvoke
+> go build
+```
